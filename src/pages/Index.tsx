@@ -10,6 +10,7 @@ import { CherryBlossomEffect } from '@/components/CherryBlossomEffect';
 import { SoothingAngerEffect } from '@/components/SoothingAngerEffect';
 import { FallingLettersEffect } from '@/components/FallingLettersEffect';
 import { EmotionCollection, type JournalEntry } from '@/components/EmotionCollection';
+import { ProfileMenu } from '@/components/ProfileMenu';
 import { useToast } from '@/hooks/use-toast';
 
 const emotionGradients: Record<string, string> = {
@@ -72,6 +73,9 @@ const Index = () => {
   }} transition={{
     duration: 0.8
   }}>
+      {/* Profile Menu */}
+      <ProfileMenu />
+
       {/* Emotion Collection */}
       <EmotionCollection entries={journalEntries} />
 
