@@ -47,6 +47,16 @@ const emotionStyles: Record<Emotion, {
     containerClass: 'max-w-lg mx-auto',
     textClass: 'text-base italic',
     placeholderText: 'What\'s on your mind...?'
+  },
+  frustrated: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-lg font-medium',
+    placeholderText: 'Vent it out... what\'s blocking you?'
+  },
+  lonely: {
+    containerClass: 'max-w-xs mx-auto',
+    textClass: 'text-sm font-light tracking-widest',
+    placeholderText: 'You\'re not alone in feeling alone...'
   }
 };
 
@@ -57,7 +67,9 @@ const emotionGlowClass: Record<Emotion, string> = {
   happy: 'emotion-glow-happy',
   anxious: 'emotion-glow-anxious',
   manic: 'emotion-glow-manic',
-  confused: 'emotion-glow-confused'
+  confused: 'emotion-glow-confused',
+  frustrated: 'emotion-glow-frustrated',
+  lonely: 'emotion-glow-lonely'
 };
 
 const emotionBorderColor: Record<Emotion, string> = {
@@ -67,7 +79,9 @@ const emotionBorderColor: Record<Emotion, string> = {
   happy: 'border-emotion-happy/40',
   anxious: 'border-emotion-anxious/40',
   manic: 'border-emotion-manic/60',
-  confused: 'border-emotion-confused/30'
+  confused: 'border-emotion-confused/30',
+  frustrated: 'border-emotion-frustrated/50',
+  lonely: 'border-emotion-lonely/40'
 };
 
 export function MorphingTextArea({ value, onChange, emotion }: MorphingTextAreaProps) {

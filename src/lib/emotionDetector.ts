@@ -1,16 +1,18 @@
-export type Emotion = 'neutral' | 'angry' | 'sad' | 'happy' | 'anxious' | 'manic' | 'confused';
+export type Emotion = 'neutral' | 'angry' | 'sad' | 'happy' | 'anxious' | 'manic' | 'confused' | 'frustrated' | 'lonely';
 
 interface EmotionKeywords {
   [key: string]: string[];
 }
 
 const emotionKeywords: EmotionKeywords = {
-  angry: ['hate', 'furious', 'rage', 'angry', 'frustrated', 'annoyed', 'pissed', 'mad', 'livid', 'fuming', 'outraged', 'hostile'],
+  angry: ['hate', 'furious', 'rage', 'angry', 'annoyed', 'pissed', 'mad', 'livid', 'fuming', 'outraged', 'hostile'],
   happy: ['love', 'great', 'amazing', 'wonderful', 'joy', 'happy', 'excited', 'grateful', 'blessed', 'fantastic', 'awesome', 'beautiful', 'thrilled'],
-  sad: ['sad', 'lonely', 'depressed', 'crying', 'hurt', 'pain', 'hopeless', 'empty', 'grief', 'heartbroken', 'miserable', 'devastated', 'tears'],
+  sad: ['sad', 'depressed', 'crying', 'hurt', 'pain', 'hopeless', 'empty', 'grief', 'heartbroken', 'miserable', 'devastated', 'tears'],
   anxious: ['worried', 'anxious', 'nervous', 'scared', 'fear', 'panic', 'stress', 'overwhelmed', 'dread', 'terrified', 'uneasy', 'restless'],
   confused: ['lost', 'why', 'confused', 'unsure', 'uncertain', 'bewildered', 'puzzled', 'perplexed', 'unclear', 'disoriented', 'what', 'how'],
-  manic: ['incredible', 'unstoppable', 'genius', 'everything', 'brilliant', 'infinite', 'electric', 'wild', 'insane', 'crazy', 'intense']
+  manic: ['incredible', 'unstoppable', 'genius', 'everything', 'brilliant', 'infinite', 'electric', 'wild', 'insane', 'crazy', 'intense'],
+  frustrated: ['frustrated', 'stuck', 'blocked', 'annoying', 'ugh', 'argh', 'impossible', 'pointless', 'useless', 'failing', 'broken', 'waste'],
+  lonely: ['lonely', 'alone', 'isolated', 'abandoned', 'forgotten', 'invisible', 'nobody', 'disconnected', 'missing', 'distant', 'apart', 'solitude']
 };
 
 export function detectEmotion(text: string, wpm: number): Emotion {
@@ -24,7 +26,9 @@ export function detectEmotion(text: string, wpm: number): Emotion {
     sad: 0,
     anxious: 0,
     manic: 0,
-    confused: 0
+    confused: 0,
+    frustrated: 0,
+    lonely: 0
   };
 
   // Calculate keyword matches

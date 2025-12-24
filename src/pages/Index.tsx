@@ -15,7 +15,9 @@ const emotionGradients: Record<string, string> = {
   happy: 'from-background via-emotion-happy/5 to-background',
   anxious: 'from-background via-emotion-anxious/5 to-background',
   manic: 'from-emotion-manic/10 via-background to-emotion-manic/5',
-  confused: 'from-emotion-confused/5 via-background to-emotion-confused/5'
+  confused: 'from-emotion-confused/5 via-background to-emotion-confused/5',
+  frustrated: 'from-background via-emotion-frustrated/8 to-background',
+  lonely: 'from-emotion-lonely/5 via-background to-emotion-lonely/8'
 };
 const Index = () => {
   const {
