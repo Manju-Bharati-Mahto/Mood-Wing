@@ -122,7 +122,7 @@ const Index = () => {
       <StarfieldBackground visible={showStarfield} />
       <ProfileMenu />
       <EmotionCollection entries={journalEntries} />
-      <AffirmationButton />
+      <AffirmationButton emotion={emotion} />
       <EmotionalAnchor />
 
       {/* Particle Effects */}
