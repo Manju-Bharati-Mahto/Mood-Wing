@@ -168,6 +168,32 @@ const Index = () => {
     resetEmotion();
   };
 
+  const handleDeleteEntry = async (id: string) => {
+    if (!user) return;
+
+    const { error } = await supabase
+      .from('journal_entries')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', user.id);
+
+    if (error) {
+      console.error('Error deleting entry:', error);
+      toast({
+        title: 'Error deleting',
+        description: 'Could not delete the entry. Please try again.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setJournalEntries(prev => prev.filter(entry => entry.id !== id));
+    toast({
+      title: 'Entry deleted',
+      description: 'Your journal entry has been removed.'
+    });
+  };
+
   // Determine which effects to show
   const showStarfield = emotion === 'neutral' && text.trim().length === 0;
   const showRain = ['sad', 'melancholic', 'devastated'].includes(emotion);
@@ -188,7 +214,7 @@ const Index = () => {
     >
       <StarfieldBackground visible={showStarfield} />
       <ProfileMenu />
-      <EmotionCollection entries={journalEntries} />
+      <EmotionCollection entries={journalEntries} onDelete={handleDeleteEntry} />
       <AffirmationButton emotion={emotion} />
       <EmotionalAnchor />
 
