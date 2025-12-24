@@ -30,8 +30,11 @@ export function EmotionalAnchor() {
             />
           </motion.div>
           
-          {/* Center dot - the true anchor */}
-          <div className="absolute w-2 h-2 rounded-full bg-foreground/80" />
+          {/* Center cross - the true anchor */}
+          <div className="absolute flex flex-col items-center gap-1">
+            <div className="w-0.5 h-2 bg-foreground/80 rounded-full" />
+            <div className="w-2 h-0.5 bg-foreground/80 rounded-full -mt-1.5" />
+          </div>
         </motion.div>
 
         {/* Tooltip */}
