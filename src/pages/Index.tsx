@@ -13,7 +13,8 @@ import { EmotionCollection, type JournalEntry } from '@/components/EmotionCollec
 import { ProfileMenu } from '@/components/ProfileMenu';
 import { StarfieldBackground } from '@/components/StarfieldBackground';
 import { EmotionParticles } from '@/components/EmotionParticles';
-import { AffirmationButton } from '@/components/AffirmationButton';
+import { TopToolbar } from '@/components/TopToolbar';
+import { AffirmationModal } from '@/components/AffirmationModal';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -71,6 +72,8 @@ const Index = () => {
   const { user } = useAuth();
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [journalOpen, setJournalOpen] = useState(false);
+  const [affirmationOpen, setAffirmationOpen] = useState(false);
   const previousEmotionRef = useRef<Emotion>(emotion);
 
   // Fetch existing journal entries on mount
@@ -214,8 +217,23 @@ const Index = () => {
     >
       <StarfieldBackground visible={showStarfield} />
       <ProfileMenu />
-      <EmotionCollection entries={journalEntries} onDelete={handleDeleteEntry} />
-      <AffirmationButton emotion={emotion} />
+      <TopToolbar 
+        entriesCount={journalEntries.length} 
+        onOpenJournal={() => setJournalOpen(true)}
+        onOpenAffirmation={() => setAffirmationOpen(true)}
+        emotion={emotion}
+      />
+      <EmotionCollection 
+        entries={journalEntries} 
+        onDelete={handleDeleteEntry}
+        isOpen={journalOpen}
+        onOpenChange={setJournalOpen}
+      />
+      <AffirmationModal 
+        emotion={emotion}
+        isOpen={affirmationOpen}
+        onOpenChange={setAffirmationOpen}
+      />
       <EmotionalAnchor />
 
       {/* Particle Effects */}
