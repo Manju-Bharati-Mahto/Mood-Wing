@@ -8,11 +8,18 @@ interface MorphingTextAreaProps {
   placeholder?: string;
 }
 
-const emotionStyles: Record<Emotion, {
+// Default style for emotions not specifically defined
+const defaultEmotionStyle = {
+  containerClass: 'max-w-2xl mx-auto',
+  textClass: 'text-lg',
+  placeholderText: 'Express yourself freely...'
+};
+
+const emotionStyles: Partial<Record<Emotion, {
   containerClass: string;
   textClass: string;
   placeholderText: string;
-}> = {
+}>> = {
   neutral: {
     containerClass: 'max-w-2xl mx-auto',
     textClass: 'text-lg',
@@ -38,6 +45,11 @@ const emotionStyles: Record<Emotion, {
     textClass: 'text-base',
     placeholderText: 'Take a breath... write what comes.'
   },
+  fearful: {
+    containerClass: 'max-w-md mx-auto',
+    textClass: 'text-sm',
+    placeholderText: 'You\'re safe here... write your fears.'
+  },
   manic: {
     containerClass: 'w-full max-w-[95vw] mx-auto',
     textClass: 'text-2xl md:text-3xl font-bold tracking-tight',
@@ -57,37 +69,136 @@ const emotionStyles: Record<Emotion, {
     containerClass: 'max-w-xs mx-auto',
     textClass: 'text-sm font-light tracking-widest',
     placeholderText: 'You\'re not alone in feeling alone...'
+  },
+  peaceful: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-lg font-light',
+    placeholderText: 'Embrace this moment of calm...'
+  },
+  grateful: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-lg',
+    placeholderText: 'What are you thankful for today?'
+  },
+  hopeful: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-lg font-light',
+    placeholderText: 'The future is bright...'
+  },
+  loving: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-lg italic',
+    placeholderText: 'Express your love...'
+  },
+  proud: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-xl font-medium',
+    placeholderText: 'Celebrate your achievement!'
+  },
+  excited: {
+    containerClass: 'max-w-3xl mx-auto',
+    textClass: 'text-xl font-semibold',
+    placeholderText: 'What\'s got you excited?!'
+  },
+  amused: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-lg',
+    placeholderText: 'Share what made you smile 😊'
+  },
+  content: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-base',
+    placeholderText: 'Enjoying the moment...'
+  },
+  jealous: {
+    containerClass: 'max-w-lg mx-auto',
+    textClass: 'text-base',
+    placeholderText: 'It\'s okay to acknowledge these feelings...'
+  },
+  guilty: {
+    containerClass: 'max-w-md mx-auto',
+    textClass: 'text-base font-light',
+    placeholderText: 'Let yourself process this...'
+  },
+  ashamed: {
+    containerClass: 'max-w-sm mx-auto',
+    textClass: 'text-sm',
+    placeholderText: 'This is a safe space...'
+  },
+  disgusted: {
+    containerClass: 'max-w-lg mx-auto',
+    textClass: 'text-base font-medium',
+    placeholderText: 'What\'s bothering you?'
+  },
+  nostalgic: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-lg italic font-light',
+    placeholderText: 'Remember when...'
+  },
+  melancholic: {
+    containerClass: 'max-w-md mx-auto',
+    textClass: 'text-base font-light tracking-wide',
+    placeholderText: 'There\'s beauty in sadness...'
+  },
+  contemplative: {
+    containerClass: 'max-w-xl mx-auto',
+    textClass: 'text-base font-light',
+    placeholderText: 'What are you thinking about...'
+  },
+  curious: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-lg',
+    placeholderText: 'What are you wondering about?'
+  },
+  bored: {
+    containerClass: 'max-w-lg mx-auto',
+    textClass: 'text-base',
+    placeholderText: '...'
+  },
+  apathetic: {
+    containerClass: 'max-w-md mx-auto',
+    textClass: 'text-sm opacity-60',
+    placeholderText: 'whatever...'
+  },
+  ecstatic: {
+    containerClass: 'w-full max-w-[95vw] mx-auto',
+    textClass: 'text-2xl md:text-3xl font-bold',
+    placeholderText: 'THIS IS THE BEST!!!'
+  },
+  devastated: {
+    containerClass: 'max-w-xs mx-auto',
+    textClass: 'text-sm font-light',
+    placeholderText: 'It\'s okay to fall apart...'
+  },
+  furious: {
+    containerClass: 'max-w-4xl mx-auto',
+    textClass: 'text-2xl font-bold uppercase tracking-tight',
+    placeholderText: 'WHAT HAPPENED?!'
+  },
+  terrified: {
+    containerClass: 'max-w-sm mx-auto',
+    textClass: 'text-xs tracking-wide',
+    placeholderText: 'breathe... you\'re safe...'
+  },
+  awestruck: {
+    containerClass: 'max-w-2xl mx-auto',
+    textClass: 'text-xl font-light',
+    placeholderText: 'Describe what amazed you...'
   }
 };
 
-const emotionGlowClass: Record<Emotion, string> = {
-  neutral: 'emotion-glow-neutral',
-  angry: 'emotion-glow-angry',
-  sad: 'emotion-glow-sad',
-  happy: 'emotion-glow-happy',
-  anxious: 'emotion-glow-anxious',
-  manic: 'emotion-glow-manic',
-  confused: 'emotion-glow-confused',
-  frustrated: 'emotion-glow-frustrated',
-  lonely: 'emotion-glow-lonely'
-};
-
-const emotionBorderColor: Record<Emotion, string> = {
-  neutral: 'border-emotion-neutral/30',
-  angry: 'border-emotion-angry/50',
-  sad: 'border-emotion-sad/30',
-  happy: 'border-emotion-happy/40',
-  anxious: 'border-emotion-anxious/40',
-  manic: 'border-emotion-manic/60',
-  confused: 'border-emotion-confused/30',
-  frustrated: 'border-emotion-frustrated/50',
-  lonely: 'border-emotion-lonely/40'
+const getEmotionStyle = (emotion: Emotion) => {
+  return emotionStyles[emotion] || defaultEmotionStyle;
 };
 
 export function MorphingTextArea({ value, onChange, emotion }: MorphingTextAreaProps) {
-  const styles = emotionStyles[emotion];
-  const glowClass = emotionGlowClass[emotion];
-  const borderClass = emotionBorderColor[emotion];
+  const styles = getEmotionStyle(emotion);
+
+  // Determine special effects based on emotion
+  const isIntense = ['manic', 'ecstatic', 'furious'].includes(emotion);
+  const isSad = ['sad', 'melancholic', 'devastated', 'lonely'].includes(emotion);
+  const isAnxious = ['anxious', 'terrified', 'fearful'].includes(emotion);
+  const isCalm = ['peaceful', 'content', 'contemplative'].includes(emotion);
 
   return (
     <motion.div
@@ -99,26 +210,25 @@ export function MorphingTextArea({ value, onChange, emotion }: MorphingTextAreaP
     >
       <motion.div
         className={`
-          relative rounded-2xl border-2 ${borderClass}
+          relative rounded-2xl border-2 border-emotion-${emotion}/30
           bg-card/50 backdrop-blur-sm
-          ${glowClass}
-          ${emotion === 'sad' ? 'shadow-inner' : ''}
-          ${emotion === 'manic' ? 'breathing' : ''}
-          ${emotion === 'anxious' ? 'vibrate-subtle' : ''}
+          emotion-glow-${emotion}
+          ${isSad ? 'shadow-inner' : ''}
+          ${isIntense ? 'breathing' : ''}
+          ${isAnxious ? 'vibrate-subtle' : ''}
           transition-shadow duration-700
         `}
         layout
         animate={{
-          borderRadius: emotion === 'sad' ? '2rem' : emotion === 'manic' ? '0.5rem' : '1rem'
+          borderRadius: isSad ? '2rem' : isIntense ? '0.5rem' : '1rem'
         }}
       >
-        {/* Inner glow effect */}
         <div 
           className={`
             absolute inset-0 rounded-2xl opacity-20
-            ${emotion === 'happy' ? 'bg-gradient-to-br from-emotion-happy/20 to-transparent' : ''}
-            ${emotion === 'manic' ? 'iridescent' : ''}
-            ${emotion === 'angry' ? 'bg-gradient-to-t from-emotion-angry/10 to-transparent' : ''}
+            ${['happy', 'ecstatic', 'excited'].includes(emotion) ? `bg-gradient-to-br from-emotion-${emotion}/20 to-transparent` : ''}
+            ${isIntense ? 'iridescent' : ''}
+            ${['angry', 'furious'].includes(emotion) ? `bg-gradient-to-t from-emotion-${emotion}/10 to-transparent` : ''}
             pointer-events-none
           `}
         />
@@ -137,14 +247,13 @@ export function MorphingTextArea({ value, onChange, emotion }: MorphingTextAreaP
             transition-all duration-500
           `}
           style={{
-            minHeight: emotion === 'manic' ? '400px' : emotion === 'sad' ? '150px' : '200px'
+            minHeight: isIntense ? '400px' : isSad ? '150px' : isCalm ? '250px' : '200px'
           }}
           animate={{
-            opacity: emotion === 'sad' ? 0.8 : 1
+            opacity: isSad ? 0.8 : 1
           }}
         />
 
-        {/* Decorative corner elements for confused state */}
         {emotion === 'confused' && (
           <>
             <motion.div

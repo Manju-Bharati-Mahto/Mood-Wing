@@ -20,10 +20,37 @@ const emotionColors: Record<Emotion, string> = {
   sad: 'bg-emotion-sad/10 border-emotion-sad/30',
   happy: 'bg-emotion-happy/10 border-emotion-happy/30',
   anxious: 'bg-emotion-anxious/10 border-emotion-anxious/30',
+  fearful: 'bg-emotion-fearful/10 border-emotion-fearful/30',
   manic: 'bg-emotion-manic/10 border-emotion-manic/30',
   confused: 'bg-emotion-confused/10 border-emotion-confused/30',
   frustrated: 'bg-emotion-frustrated/10 border-emotion-frustrated/30',
-  lonely: 'bg-emotion-lonely/10 border-emotion-lonely/30'
+  lonely: 'bg-emotion-lonely/10 border-emotion-lonely/30',
+  peaceful: 'bg-emotion-peaceful/10 border-emotion-peaceful/30',
+  grateful: 'bg-emotion-grateful/10 border-emotion-grateful/30',
+  hopeful: 'bg-emotion-hopeful/10 border-emotion-hopeful/30',
+  loving: 'bg-emotion-loving/10 border-emotion-loving/30',
+  proud: 'bg-emotion-proud/10 border-emotion-proud/30',
+  excited: 'bg-emotion-excited/10 border-emotion-excited/30',
+  amused: 'bg-emotion-amused/10 border-emotion-amused/30',
+  content: 'bg-emotion-content/10 border-emotion-content/30',
+  jealous: 'bg-emotion-jealous/10 border-emotion-jealous/30',
+  guilty: 'bg-emotion-guilty/10 border-emotion-guilty/30',
+  ashamed: 'bg-emotion-ashamed/10 border-emotion-ashamed/30',
+  disgusted: 'bg-emotion-disgusted/10 border-emotion-disgusted/30',
+  bitter: 'bg-emotion-bitter/10 border-emotion-bitter/30',
+  resentful: 'bg-emotion-resentful/10 border-emotion-resentful/30',
+  envious: 'bg-emotion-envious/10 border-emotion-envious/30',
+  nostalgic: 'bg-emotion-nostalgic/10 border-emotion-nostalgic/30',
+  melancholic: 'bg-emotion-melancholic/10 border-emotion-melancholic/30',
+  contemplative: 'bg-emotion-contemplative/10 border-emotion-contemplative/30',
+  curious: 'bg-emotion-curious/10 border-emotion-curious/30',
+  bored: 'bg-emotion-bored/10 border-emotion-bored/30',
+  apathetic: 'bg-emotion-apathetic/10 border-emotion-apathetic/30',
+  ecstatic: 'bg-emotion-ecstatic/10 border-emotion-ecstatic/30',
+  devastated: 'bg-emotion-devastated/10 border-emotion-devastated/30',
+  furious: 'bg-emotion-furious/10 border-emotion-furious/30',
+  terrified: 'bg-emotion-terrified/10 border-emotion-terrified/30',
+  awestruck: 'bg-emotion-awestruck/10 border-emotion-awestruck/30'
 };
 
 const emotionTextColors: Record<Emotion, string> = {
@@ -32,10 +59,37 @@ const emotionTextColors: Record<Emotion, string> = {
   sad: 'text-emotion-sad',
   happy: 'text-emotion-happy',
   anxious: 'text-emotion-anxious',
+  fearful: 'text-emotion-fearful',
   manic: 'text-emotion-manic',
   confused: 'text-emotion-confused',
   frustrated: 'text-emotion-frustrated',
-  lonely: 'text-emotion-lonely'
+  lonely: 'text-emotion-lonely',
+  peaceful: 'text-emotion-peaceful',
+  grateful: 'text-emotion-grateful',
+  hopeful: 'text-emotion-hopeful',
+  loving: 'text-emotion-loving',
+  proud: 'text-emotion-proud',
+  excited: 'text-emotion-excited',
+  amused: 'text-emotion-amused',
+  content: 'text-emotion-content',
+  jealous: 'text-emotion-jealous',
+  guilty: 'text-emotion-guilty',
+  ashamed: 'text-emotion-ashamed',
+  disgusted: 'text-emotion-disgusted',
+  bitter: 'text-emotion-bitter',
+  resentful: 'text-emotion-resentful',
+  envious: 'text-emotion-envious',
+  nostalgic: 'text-emotion-nostalgic',
+  melancholic: 'text-emotion-melancholic',
+  contemplative: 'text-emotion-contemplative',
+  curious: 'text-emotion-curious',
+  bored: 'text-emotion-bored',
+  apathetic: 'text-emotion-apathetic',
+  ecstatic: 'text-emotion-ecstatic',
+  devastated: 'text-emotion-devastated',
+  furious: 'text-emotion-furious',
+  terrified: 'text-emotion-terrified',
+  awestruck: 'text-emotion-awestruck'
 };
 
 const emotionEmojis: Record<Emotion, string> = {
@@ -44,10 +98,37 @@ const emotionEmojis: Record<Emotion, string> = {
   sad: '🌧️',
   happy: '🌸',
   anxious: '💫',
+  fearful: '👻',
   manic: '⚡',
   confused: '🌀',
   frustrated: '💢',
-  lonely: '🌙'
+  lonely: '🌙',
+  peaceful: '🍃',
+  grateful: '🙏',
+  hopeful: '🌅',
+  loving: '💕',
+  proud: '🏆',
+  excited: '🎉',
+  amused: '😄',
+  content: '☕',
+  jealous: '💚',
+  guilty: '⚖️',
+  ashamed: '😔',
+  disgusted: '🤢',
+  bitter: '🍋',
+  resentful: '😤',
+  envious: '👀',
+  nostalgic: '📷',
+  melancholic: '🌑',
+  contemplative: '🧘',
+  curious: '🔍',
+  bored: '😐',
+  apathetic: '💤',
+  ecstatic: '✨',
+  devastated: '💔',
+  furious: '🌋',
+  terrified: '😱',
+  awestruck: '🤩'
 };
 
 export function EmotionCollection({ entries }: EmotionCollectionProps) {
@@ -55,7 +136,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
 
   return (
     <>
-      {/* Collection Icon Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
         className="fixed top-4 left-4 z-50 flex items-center gap-2 px-3 py-2 rounded-lg bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-colors group"
@@ -69,7 +149,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
           </span>
         )}
         
-        {/* Stacked preview cards */}
         {entries.length > 0 && (
           <div className="absolute -bottom-1 -right-1 flex">
             {entries.slice(-3).map((entry, index) => (
@@ -87,11 +166,9 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
         )}
       </motion.button>
 
-      {/* Collection Drawer */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm"
               initial={{ opacity: 0 }}
@@ -100,7 +177,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Drawer */}
             <motion.div
               className="fixed top-0 left-0 z-50 h-full w-full max-w-md bg-background border-r border-border shadow-2xl overflow-hidden"
               initial={{ x: '-100%' }}
@@ -108,7 +184,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
-              {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-border">
                 <div>
                   <h2 className="text-lg font-medium text-foreground">Emotion Journal</h2>
@@ -122,7 +197,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
                 </button>
               </div>
 
-              {/* Entries Stack */}
               <div className="p-4 h-[calc(100%-80px)] overflow-y-auto">
                 {entries.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
@@ -147,7 +221,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
                           transformOrigin: 'center center'
                         }}
                       >
-                        {/* Emotion badge */}
                         <div className="flex items-center justify-between mb-2">
                           <span className={`text-xs font-medium capitalize ${emotionTextColors[entry.emotion]}`}>
                             {emotionEmojis[entry.emotion]} {entry.emotion}
@@ -157,7 +230,6 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
                           </span>
                         </div>
                         
-                        {/* Entry text */}
                         <p className="text-sm text-foreground/80 leading-relaxed line-clamp-4">
                           {entry.text}
                         </p>

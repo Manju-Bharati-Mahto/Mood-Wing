@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Flame, CloudRain, Sparkles, AlertCircle, Zap, HelpCircle, Ban, Heart } from 'lucide-react';
+import { Send, Flame, CloudRain, Sparkles, AlertCircle, Zap, HelpCircle, Ban, Heart, Leaf, Gift, Sun, HeartHandshake, Trophy, PartyPopper, Smile, Coffee, Eye, Scale, EyeOff, Skull, Angry, ThumbsDown, Users, Clock, Compass, Search, Moon, Circle, Star, Frown, Skull as SkullIcon, Ghost, Wand } from 'lucide-react';
 import { Emotion } from '@/lib/emotionDetector';
 
 interface AdaptiveSubmitButtonProps {
@@ -15,10 +15,37 @@ const emotionIcons: Record<Emotion, React.ReactNode> = {
   sad: <CloudRain className="w-4 h-4" />,
   happy: <Sparkles className="w-5 h-5" />,
   anxious: <AlertCircle className="w-5 h-5" />,
+  fearful: <Ghost className="w-5 h-5" />,
   manic: <Zap className="w-7 h-7" />,
   confused: <HelpCircle className="w-5 h-5" />,
   frustrated: <Ban className="w-5 h-5" />,
-  lonely: <Heart className="w-4 h-4" />
+  lonely: <Heart className="w-4 h-4" />,
+  peaceful: <Leaf className="w-5 h-5" />,
+  grateful: <Gift className="w-5 h-5" />,
+  hopeful: <Sun className="w-5 h-5" />,
+  loving: <HeartHandshake className="w-5 h-5" />,
+  proud: <Trophy className="w-5 h-5" />,
+  excited: <PartyPopper className="w-5 h-5" />,
+  amused: <Smile className="w-5 h-5" />,
+  content: <Coffee className="w-5 h-5" />,
+  jealous: <Eye className="w-5 h-5" />,
+  guilty: <Scale className="w-5 h-5" />,
+  ashamed: <EyeOff className="w-5 h-5" />,
+  disgusted: <Skull className="w-5 h-5" />,
+  bitter: <Angry className="w-5 h-5" />,
+  resentful: <ThumbsDown className="w-5 h-5" />,
+  envious: <Users className="w-5 h-5" />,
+  nostalgic: <Clock className="w-5 h-5" />,
+  melancholic: <Moon className="w-5 h-5" />,
+  contemplative: <Compass className="w-5 h-5" />,
+  curious: <Search className="w-5 h-5" />,
+  bored: <Circle className="w-5 h-5" />,
+  apathetic: <Circle className="w-4 h-4" />,
+  ecstatic: <Star className="w-6 h-6" />,
+  devastated: <Frown className="w-5 h-5" />,
+  furious: <Flame className="w-7 h-7" />,
+  terrified: <Ghost className="w-6 h-6" />,
+  awestruck: <Wand className="w-5 h-5" />
 };
 
 const emotionLabels: Record<Emotion, string> = {
@@ -27,10 +54,37 @@ const emotionLabels: Record<Emotion, string> = {
   sad: 'let go...',
   happy: 'Capture Joy',
   anxious: 'Breathe & Save',
+  fearful: 'Face it...',
   manic: 'SUBMIT!!!',
   confused: 'Save anyway?',
   frustrated: 'Just Save It',
-  lonely: 'reach out...'
+  lonely: 'reach out...',
+  peaceful: 'Save calmly',
+  grateful: 'Preserve thanks',
+  hopeful: 'Save hope',
+  loving: 'Save with love',
+  proud: 'Save achievement',
+  excited: 'Capture energy!',
+  amused: 'Save the laughs',
+  content: 'Gently save',
+  jealous: 'Acknowledge it',
+  guilty: 'Let it go...',
+  ashamed: 'Save privately',
+  disgusted: 'Express & save',
+  bitter: 'Save honestly',
+  resentful: 'Record feelings',
+  envious: 'Save thoughts',
+  nostalgic: 'Preserve memory',
+  melancholic: 'embrace sadness...',
+  contemplative: 'Capture thoughts',
+  curious: 'Save discoveries',
+  bored: 'whatever...',
+  apathetic: '...',
+  ecstatic: 'SAVE THIS MOMENT!!!',
+  devastated: 'let it out...',
+  furious: 'HOLD TO EXPLODE',
+  terrified: 'Save quickly...',
+  awestruck: 'Capture the awe'
 };
 
 export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSubmitButtonProps) {
@@ -44,7 +98,9 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
   const lastMouseMove = useRef<number>(Date.now());
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Clear timers on unmount
+  const requiresLongPress = emotion === 'angry' || emotion === 'furious';
+  const isEvasive = emotion === 'anxious' || emotion === 'terrified';
+
   useEffect(() => {
     return () => {
       if (longPressTimer.current) clearTimeout(longPressTimer.current);
@@ -53,15 +109,13 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
     };
   }, []);
 
-  // Reset button position when emotion changes
   useEffect(() => {
     setButtonPosition({ x: 0, y: 0 });
     setIsCalm(false);
   }, [emotion]);
 
-  // Anxious button evasion logic
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (emotion !== 'anxious' || isCalm) return;
+    if (!isEvasive || isCalm) return;
 
     const button = buttonRef.current;
     if (!button) return;
@@ -77,7 +131,7 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
 
     if (distance < 100) {
       const angle = Math.atan2(buttonCenterY - e.clientY, buttonCenterX - e.clientX);
-      const moveDistance = 30;
+      const moveDistance = emotion === 'terrified' ? 50 : 30;
       
       setButtonPosition(prev => ({
         x: Math.max(-100, Math.min(100, prev.x + Math.cos(angle) * moveDistance)),
@@ -87,17 +141,15 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
 
     lastMouseMove.current = Date.now();
     
-    // Start calm timer
     if (calmTimer.current) clearTimeout(calmTimer.current);
     calmTimer.current = setTimeout(() => {
       setIsCalm(true);
       setButtonPosition({ x: 0, y: 0 });
     }, 2000);
-  }, [emotion, isCalm, buttonPosition]);
+  }, [emotion, isCalm, buttonPosition, isEvasive]);
 
-  // Long press for angry state
   const handleMouseDown = useCallback(() => {
-    if (emotion === 'angry' && !disabled) {
+    if (requiresLongPress && !disabled) {
       setIsLongPressing(true);
       
       progressInterval.current = setInterval(() => {
@@ -107,11 +159,11 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
             onSubmit();
             return 0;
           }
-          return prev + 6.67; // 100% over 1.5 seconds
+          return prev + 6.67;
         });
       }, 100);
     }
-  }, [emotion, disabled, onSubmit]);
+  }, [requiresLongPress, disabled, onSubmit]);
 
   const handleMouseUp = useCallback(() => {
     setIsLongPressing(false);
@@ -120,32 +172,48 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
   }, []);
 
   const handleClick = useCallback(() => {
-    if (emotion !== 'angry' && !disabled) {
+    if (!requiresLongPress && !disabled) {
       onSubmit();
     }
-  }, [emotion, disabled, onSubmit]);
+  }, [requiresLongPress, disabled, onSubmit]);
 
-  // Get button styles based on emotion
   const getButtonStyles = () => {
     const baseStyles = "relative flex items-center justify-center gap-2 font-medium transition-all duration-500 overflow-hidden";
     
     switch (emotion) {
       case 'angry':
-        return `${baseStyles} w-48 h-20 md:w-64 md:h-24 rounded-xl bg-emotion-angry text-foreground shake-violent`;
+      case 'furious':
+        return `${baseStyles} w-48 h-20 md:w-64 md:h-24 rounded-xl bg-emotion-${emotion} text-foreground shake-violent`;
       case 'sad':
-        return `${baseStyles} px-6 py-2 rounded-full bg-emotion-sad/60 text-foreground/80 opacity-70 hover:opacity-100`;
+      case 'melancholic':
+      case 'devastated':
+        return `${baseStyles} px-6 py-2 rounded-full bg-emotion-${emotion}/60 text-foreground/80 opacity-70 hover:opacity-100`;
       case 'happy':
-        return `${baseStyles} px-8 py-4 rounded-2xl bg-gradient-to-r from-emotion-happy to-emotion-happy/80 text-primary-foreground float-gentle`;
+      case 'ecstatic':
+      case 'excited':
+        return `${baseStyles} px-8 py-4 rounded-2xl bg-gradient-to-r from-emotion-${emotion} to-emotion-${emotion}/80 text-primary-foreground float-gentle`;
       case 'anxious':
-        return `${baseStyles} px-6 py-3 rounded-lg bg-emotion-anxious/80 text-primary-foreground pulse-glow`;
+      case 'terrified':
+        return `${baseStyles} px-6 py-3 rounded-lg bg-emotion-${emotion}/80 text-primary-foreground pulse-glow`;
       case 'manic':
         return `${baseStyles} px-10 py-5 rounded-lg bg-emotion-manic text-foreground text-xl font-bold iridescent`;
       case 'confused':
         return `${baseStyles} px-6 py-3 rounded-lg bg-emotion-confused/60 text-foreground border-2 border-dashed border-emotion-confused`;
       case 'frustrated':
-        return `${baseStyles} px-8 py-4 rounded-md bg-emotion-frustrated text-foreground font-semibold`;
+      case 'bitter':
+      case 'resentful':
+        return `${baseStyles} px-8 py-4 rounded-md bg-emotion-${emotion} text-foreground font-semibold`;
       case 'lonely':
         return `${baseStyles} px-5 py-2 rounded-full bg-emotion-lonely/50 text-foreground/70 text-sm`;
+      case 'peaceful':
+      case 'content':
+        return `${baseStyles} px-8 py-4 rounded-full bg-emotion-${emotion}/70 text-foreground breathing`;
+      case 'loving':
+      case 'grateful':
+        return `${baseStyles} px-8 py-4 rounded-2xl bg-emotion-${emotion} text-foreground`;
+      case 'apathetic':
+      case 'bored':
+        return `${baseStyles} px-6 py-3 rounded-lg bg-muted text-muted-foreground opacity-50`;
       default:
         return `${baseStyles} px-8 py-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90`;
     }
@@ -169,16 +237,15 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
           y: buttonPosition.y,
           scale: isLongPressing ? 0.95 : 1
         }}
-        whileHover={emotion !== 'angry' && emotion !== 'anxious' ? { scale: 1.05 } : {}}
-        whileTap={emotion !== 'angry' ? { scale: 0.95 } : {}}
+        whileHover={!requiresLongPress && !isEvasive ? { scale: 1.05 } : {}}
+        whileTap={!requiresLongPress ? { scale: 0.95 } : {}}
         transition={{
           type: 'spring',
           stiffness: 400,
           damping: 25
         }}
       >
-        {/* Long press progress bar for angry state */}
-        {emotion === 'angry' && (
+        {requiresLongPress && (
           <motion.div
             className="absolute inset-0 bg-foreground/20"
             initial={{ scaleX: 0 }}
@@ -196,14 +263,13 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
             className="flex items-center gap-2 relative z-10"
           >
             {emotionIcons[emotion]}
-            <span>{emotion === 'angry' && isLongPressing ? 'Hold...' : emotionLabels[emotion]}</span>
+            <span>{requiresLongPress && isLongPressing ? 'Hold...' : emotionLabels[emotion]}</span>
           </motion.span>
         </AnimatePresence>
       </motion.button>
 
-      {/* Instructions for angry state */}
       <AnimatePresence>
-        {emotion === 'angry' && !isLongPressing && (
+        {requiresLongPress && !isLongPressing && (
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -213,7 +279,7 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
             Hold to release (1.5s)
           </motion.p>
         )}
-        {emotion === 'anxious' && !isCalm && (
+        {isEvasive && !isCalm && (
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
