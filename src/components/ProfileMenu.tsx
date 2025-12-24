@@ -11,13 +11,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Switch } from '@/components/ui/switch';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 
 export const ProfileMenu = () => {
-  const [darkMode, setDarkMode] = useState(true);
   const [notifications, setNotifications] = useState(true);
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const { toast } = useToast();
+  const isDarkMode = theme === 'dark';
 
   const handleSignOut = async () => {
     await signOut();
@@ -59,12 +61,12 @@ export const ProfileMenu = () => {
           
           <DropdownMenuItem className="flex items-center justify-between cursor-pointer">
             <div className="flex items-center gap-2">
-              {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+              {isDarkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
               <span>Dark Mode</span>
             </div>
             <Switch 
-              checked={darkMode} 
-              onCheckedChange={setDarkMode}
+              checked={isDarkMode} 
+              onCheckedChange={toggleTheme}
               onClick={(e) => e.stopPropagation()}
             />
           </DropdownMenuItem>
