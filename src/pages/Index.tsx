@@ -11,6 +11,7 @@ import { SoothingAngerEffect } from '@/components/SoothingAngerEffect';
 import { FallingLettersEffect } from '@/components/FallingLettersEffect';
 import { EmotionCollection, type JournalEntry } from '@/components/EmotionCollection';
 import { ProfileMenu } from '@/components/ProfileMenu';
+import { StarfieldBackground } from '@/components/StarfieldBackground';
 import { useToast } from '@/hooks/use-toast';
 
 const emotionGradients: Record<string, string> = {
@@ -73,6 +74,9 @@ const Index = () => {
   }} transition={{
     duration: 0.8
   }}>
+      {/* Starfield Background */}
+      <StarfieldBackground />
+
       {/* Profile Menu */}
       <ProfileMenu />
 
