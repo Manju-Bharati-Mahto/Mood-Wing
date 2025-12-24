@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
+interface StarfieldBackgroundProps {
+  visible?: boolean;
+}
 interface Star {
   x: number;
   y: number;
@@ -19,7 +22,7 @@ interface Galaxy {
   color: string;
 }
 
-export const StarfieldBackground = () => {
+export const StarfieldBackground = ({ visible = true }: StarfieldBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
   const galaxiesRef = useRef<Galaxy[]>([]);
@@ -177,8 +180,8 @@ export const StarfieldBackground = () => {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 2 }}
+      animate={{ opacity: visible ? 1 : 0 }}
+      transition={{ duration: 1.5 }}
     />
   );
 };
