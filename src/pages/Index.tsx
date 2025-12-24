@@ -15,6 +15,8 @@ import { StarfieldBackground } from '@/components/StarfieldBackground';
 import { EmotionParticles } from '@/components/EmotionParticles';
 import { AffirmationButton } from '@/components/AffirmationButton';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import type { Emotion } from '@/lib/emotionDetector';
 
 const emotionGradients: Record<Emotion, string> = {
@@ -66,8 +68,42 @@ const Index = () => {
     resetEmotion
   } = useEmotionState();
   const { toast } = useToast();
+  const { user } = useAuth();
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
+  const [loading, setLoading] = useState(true);
   const previousEmotionRef = useRef<Emotion>(emotion);
+
+  // Fetch existing journal entries on mount
+  useEffect(() => {
+    const fetchEntries = async () => {
+      if (!user) return;
+      
+      const { data, error } = await supabase
+        .from('journal_entries')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error('Error fetching entries:', error);
+        toast({
+          title: 'Error loading entries',
+          description: 'Could not load your journal entries.',
+          variant: 'destructive'
+        });
+      } else if (data) {
+        setJournalEntries(data.map(entry => ({
+          id: entry.id,
+          text: entry.text,
+          emotion: entry.emotion as Emotion,
+          timestamp: new Date(entry.created_at)
+        })));
+      }
+      setLoading(false);
+    };
+
+    fetchEntries();
+  }, [user]);
 
   // Track emotion changes for sound triggers
   useEffect(() => {
@@ -76,7 +112,7 @@ const Index = () => {
     }
   }, [emotion]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (text.trim().length === 0) {
       toast({
         title: "Empty entry",
@@ -86,11 +122,42 @@ const Index = () => {
       return;
     }
 
+    if (!user) {
+      toast({
+        title: "Not logged in",
+        description: "Please log in to save entries.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Save to database
+    const { data, error } = await supabase
+      .from('journal_entries')
+      .insert({
+        user_id: user.id,
+        text: text.trim(),
+        emotion: emotion
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error saving entry:', error);
+      toast({
+        title: "Error saving",
+        description: "Could not save your entry. Please try again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Add to local state
     const newEntry: JournalEntry = {
-      id: crypto.randomUUID(),
-      text: text.trim(),
-      emotion,
-      timestamp: new Date()
+      id: data.id,
+      text: data.text,
+      emotion: data.emotion as Emotion,
+      timestamp: new Date(data.created_at)
     };
     setJournalEntries(prev => [newEntry, ...prev]);
 
