@@ -7,6 +7,7 @@ import { EmotionIndicator } from '@/components/EmotionIndicator';
 import { RainEffect } from '@/components/RainEffect';
 import { CherryBlossomEffect } from '@/components/CherryBlossomEffect';
 import { SoothingAngerEffect } from '@/components/SoothingAngerEffect';
+import { FallingLettersEffect } from '@/components/FallingLettersEffect';
 import { useToast } from '@/hooks/use-toast';
 const emotionGradients: Record<string, string> = {
   neutral: 'from-background via-background to-background',
@@ -64,6 +65,11 @@ const Index = () => {
       <RainEffect active={emotion === 'sad'} />
       <CherryBlossomEffect active={emotion === 'happy'} />
       <SoothingAngerEffect active={emotion === 'angry'} />
+      <FallingLettersEffect 
+        active={emotion === 'frustrated' || emotion === 'lonely'} 
+        text={text} 
+        emotion={emotion === 'frustrated' ? 'frustrated' : 'lonely'} 
+      />
 
       {/* Ambient background effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
