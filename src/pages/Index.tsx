@@ -13,6 +13,7 @@ import { EmotionCollection, type JournalEntry } from '@/components/EmotionCollec
 import { ProfileMenu } from '@/components/ProfileMenu';
 import { StarfieldBackground } from '@/components/StarfieldBackground';
 import { EmotionParticles } from '@/components/EmotionParticles';
+import { AffirmationButton } from '@/components/AffirmationButton';
 import { useToast } from '@/hooks/use-toast';
 import type { Emotion } from '@/lib/emotionDetector';
 
@@ -100,7 +101,8 @@ const Index = () => {
     resetEmotion();
   };
 
-  // Determine which particle effects to show
+  // Determine which effects to show
+  const showStarfield = emotion === 'neutral' && text.trim().length === 0;
   const showRain = ['sad', 'melancholic', 'devastated'].includes(emotion);
   const showBlossoms = ['happy', 'ecstatic', 'excited', 'loving'].includes(emotion);
   const showAngerEffect = ['angry', 'furious'].includes(emotion);
@@ -117,9 +119,10 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <StarfieldBackground />
+      <StarfieldBackground visible={showStarfield} />
       <ProfileMenu />
       <EmotionCollection entries={journalEntries} />
+      <AffirmationButton />
       <EmotionalAnchor />
 
       {/* Particle Effects */}
