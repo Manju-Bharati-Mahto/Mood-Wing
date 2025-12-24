@@ -69,6 +69,8 @@ export default {
           anxious: "hsl(var(--emotion-anxious))",
           manic: "hsl(var(--emotion-manic))",
           confused: "hsl(var(--emotion-confused))",
+          frustrated: "hsl(var(--emotion-frustrated))",
+          lonely: "hsl(var(--emotion-lonely))",
         },
       },
       borderRadius: {

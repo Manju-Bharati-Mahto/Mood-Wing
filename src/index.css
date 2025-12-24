@@ -45,6 +45,8 @@
     --emotion-anxious: 180 70% 50%;
     --emotion-manic: 290 80% 60%;
     --emotion-confused: 270 50% 60%;
+    --emotion-frustrated: 25 80% 50%;
+    --emotion-lonely: 250 40% 45%;
 
     /* Glows */
     --glow-neutral: 0 0 40px hsl(220 20% 50% / 0.3);
@@ -54,6 +56,8 @@
     --glow-anxious: 0 0 30px hsl(180 70% 50% / 0.4), 0 0 60px hsl(180 70% 50% / 0.2);
     --glow-manic: 0 0 80px hsl(290 80% 60% / 0.6), 0 0 150px hsl(290 80% 60% / 0.3);
     --glow-confused: 0 0 40px hsl(270 50% 60% / 0.4);
+    --glow-frustrated: 0 0 50px hsl(25 80% 50% / 0.5), 0 0 100px hsl(25 80% 50% / 0.25);
+    --glow-lonely: 0 0 60px hsl(250 40% 45% / 0.4), 0 0 120px hsl(250 40% 45% / 0.2);
 
     /* Sidebar (keeping for compatibility) */
     --sidebar-background: 222 47% 8%;
@@ -109,6 +113,14 @@
   
   .emotion-glow-confused {
     box-shadow: var(--glow-confused);
+  }
+
+  .emotion-glow-frustrated {
+    box-shadow: var(--glow-frustrated);
+  }
+
+  .emotion-glow-lonely {
+    box-shadow: var(--glow-lonely);
   }
 
   .journal-prose {

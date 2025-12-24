@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Flame, CloudRain, Sparkles, AlertCircle, Zap, HelpCircle } from 'lucide-react';
+import { Send, Flame, CloudRain, Sparkles, AlertCircle, Zap, HelpCircle, Ban, Heart } from 'lucide-react';
 import { Emotion } from '@/lib/emotionDetector';
 
 interface AdaptiveSubmitButtonProps {
@@ -16,7 +16,9 @@ const emotionIcons: Record<Emotion, React.ReactNode> = {
   happy: <Sparkles className="w-5 h-5" />,
   anxious: <AlertCircle className="w-5 h-5" />,
   manic: <Zap className="w-7 h-7" />,
-  confused: <HelpCircle className="w-5 h-5" />
+  confused: <HelpCircle className="w-5 h-5" />,
+  frustrated: <Ban className="w-5 h-5" />,
+  lonely: <Heart className="w-4 h-4" />
 };
 
 const emotionLabels: Record<Emotion, string> = {
@@ -26,7 +28,9 @@ const emotionLabels: Record<Emotion, string> = {
   happy: 'Capture Joy',
   anxious: 'Breathe & Save',
   manic: 'SUBMIT!!!',
-  confused: 'Save anyway?'
+  confused: 'Save anyway?',
+  frustrated: 'Just Save It',
+  lonely: 'reach out...'
 };
 
 export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSubmitButtonProps) {
@@ -138,6 +142,10 @@ export function AdaptiveSubmitButton({ emotion, onSubmit, disabled }: AdaptiveSu
         return `${baseStyles} px-10 py-5 rounded-lg bg-emotion-manic text-foreground text-xl font-bold iridescent`;
       case 'confused':
         return `${baseStyles} px-6 py-3 rounded-lg bg-emotion-confused/60 text-foreground border-2 border-dashed border-emotion-confused`;
+      case 'frustrated':
+        return `${baseStyles} px-8 py-4 rounded-md bg-emotion-frustrated text-foreground font-semibold`;
+      case 'lonely':
+        return `${baseStyles} px-5 py-2 rounded-full bg-emotion-lonely/50 text-foreground/70 text-sm`;
       default:
         return `${baseStyles} px-8 py-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90`;
     }

@@ -14,7 +14,9 @@ const emotionEmoji: Record<Emotion, string> = {
   happy: '★',
   anxious: '◈',
   manic: '✦',
-  confused: '◎'
+  confused: '◎',
+  frustrated: '▣',
+  lonely: '♡'
 };
 
 const emotionColorClass: Record<Emotion, string> = {
@@ -24,7 +26,9 @@ const emotionColorClass: Record<Emotion, string> = {
   happy: 'text-emotion-happy',
   anxious: 'text-emotion-anxious',
   manic: 'text-emotion-manic',
-  confused: 'text-emotion-confused'
+  confused: 'text-emotion-confused',
+  frustrated: 'text-emotion-frustrated',
+  lonely: 'text-emotion-lonely'
 };
 
 export function EmotionIndicator({ emotion, wpm, wordCount }: EmotionIndicatorProps) {
