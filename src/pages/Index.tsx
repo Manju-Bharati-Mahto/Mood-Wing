@@ -88,7 +88,9 @@ const Index = () => {
         .order('created_at', { ascending: false });
       
       if (error) {
-        console.error('Error fetching entries:', error);
+        if (import.meta.env.DEV) {
+          console.error('Error fetching entries:', error);
+        }
         toast({
           title: 'Error loading entries',
           description: 'Could not load your journal entries.',
@@ -146,7 +148,9 @@ const Index = () => {
       .single();
 
     if (error) {
-      console.error('Error saving entry:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error saving entry:', error);
+      }
       toast({
         title: "Error saving",
         description: "Could not save your entry. Please try again.",
@@ -181,7 +185,9 @@ const Index = () => {
       .eq('user_id', user.id);
 
     if (error) {
-      console.error('Error deleting entry:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error deleting entry:', error);
+      }
       toast({
         title: 'Error deleting',
         description: 'Could not delete the entry. Please try again.',
