@@ -1,3 +1,6 @@
+A journaling app that detects the user's sentiment (via text analysis or typing speed) and morphs the UI to match their emotional state. It validates the user's feelings by becoming the feeling.
+It covers a spectrum of 32+ emotions and changes the UI accordingly.
+
 # Welcome to your Lovable project
 
 ## Project info
