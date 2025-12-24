@@ -4,6 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
 
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap");
+
 @layer base {
   :root,
   .dark {
@@ -45,13 +49,13 @@
     --emotion-happy: 38 92% 55%;
     --emotion-anxious: 180 70% 50%;
     --emotion-fearful: 270 60% 40%;
-    
+
     /* Complex Emotions */
     --emotion-manic: 290 80% 60%;
     --emotion-confused: 270 50% 60%;
     --emotion-frustrated: 25 80% 50%;
     --emotion-lonely: 250 40% 45%;
-    
+
     /* Positive Spectrum */
     --emotion-peaceful: 170 50% 45%;
     --emotion-grateful: 45 80% 55%;
@@ -61,7 +65,7 @@
     --emotion-excited: 15 85% 55%;
     --emotion-amused: 55 75% 50%;
     --emotion-content: 160 40% 50%;
-    
+
     /* Negative Spectrum */
     --emotion-jealous: 120 50% 35%;
     --emotion-guilty: 20 30% 40%;
@@ -70,7 +74,7 @@
     --emotion-bitter: 30 50% 30%;
     --emotion-resentful: 0 50% 35%;
     --emotion-envious: 150 40% 35%;
-    
+
     /* Subtle States */
     --emotion-nostalgic: 30 40% 50%;
     --emotion-melancholic: 230 45% 50%;
@@ -78,7 +82,7 @@
     --emotion-curious: 190 60% 55%;
     --emotion-bored: 200 10% 45%;
     --emotion-apathetic: 220 10% 40%;
-    
+
     /* Intense States */
     --emotion-ecstatic: 50 100% 55%;
     --emotion-devastated: 240 50% 30%;
@@ -174,6 +178,108 @@
     --sidebar-accent-foreground: 222 47% 11%;
     --sidebar-border: 210 20% 88%;
     --sidebar-ring: 210 50% 45%;
+  }
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 20% 90%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 20% 90%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 20% 90%;
+    --primary: 210 40% 70%;
+    --primary-foreground: 210 40% 96.0784%;
+    --secondary: 222 30% 15%;
+    --secondary-foreground: 210 20% 85%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 222 30% 18%;
+    --accent-foreground: 210 20% 90%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 18%;
+    --input: 222 30% 15%;
+    --ring: 210 40% 50%;
+    --radius: 0.75rem;
+    --emotion-neutral: 220 20% 50%;
+    --emotion-angry: 0 72% 51%;
+    --emotion-sad: 220 60% 55%;
+    --emotion-happy: 38 92% 55%;
+    --emotion-anxious: 180 70% 50%;
+    --emotion-fearful: 270 60% 40%;
+    --emotion-manic: 290 80% 60%;
+    --emotion-confused: 270 50% 60%;
+    --emotion-frustrated: 25 80% 50%;
+    --emotion-lonely: 250 40% 45%;
+    --emotion-peaceful: 170 50% 45%;
+    --emotion-grateful: 45 80% 55%;
+    --emotion-hopeful: 50 70% 60%;
+    --emotion-loving: 340 80% 60%;
+    --emotion-proud: 35 90% 50%;
+    --emotion-excited: 15 85% 55%;
+    --emotion-amused: 55 75% 50%;
+    --emotion-content: 160 40% 50%;
+    --emotion-jealous: 120 50% 35%;
+    --emotion-guilty: 20 30% 40%;
+    --emotion-ashamed: 350 40% 45%;
+    --emotion-disgusted: 80 40% 35%;
+    --emotion-bitter: 30 50% 30%;
+    --emotion-resentful: 0 50% 35%;
+    --emotion-envious: 150 40% 35%;
+    --emotion-nostalgic: 30 40% 50%;
+    --emotion-melancholic: 230 45% 50%;
+    --emotion-contemplative: 200 30% 55%;
+    --emotion-curious: 190 60% 55%;
+    --emotion-bored: 200 10% 45%;
+    --emotion-apathetic: 220 10% 40%;
+    --emotion-ecstatic: 50 100% 55%;
+    --emotion-devastated: 240 50% 30%;
+    --emotion-furious: 0 90% 45%;
+    --emotion-terrified: 280 70% 35%;
+    --emotion-awestruck: 280 60% 60%;
+    --glow-neutral: 0 0 40px hsl(220 20% 50% / 0.3);
+    --glow-angry: 0 0 60px hsl(0 72% 51% / 0.5), 0 0 120px hsl(0 72% 51% / 0.2);
+    --glow-sad: 0 0 40px hsl(220 60% 55% / 0.3), 0 0 80px hsl(220 60% 55% / 0.15);
+    --glow-happy: 0 0 50px hsl(38 92% 55% / 0.4), 0 0 100px hsl(38 92% 55% / 0.2);
+    --glow-anxious: 0 0 30px hsl(180 70% 50% / 0.4), 0 0 60px hsl(180 70% 50% / 0.2);
+    --glow-fearful: 0 0 50px hsl(270 60% 40% / 0.5), 0 0 100px hsl(270 60% 40% / 0.2);
+    --glow-manic: 0 0 80px hsl(290 80% 60% / 0.6), 0 0 150px hsl(290 80% 60% / 0.3);
+    --glow-confused: 0 0 40px hsl(270 50% 60% / 0.4);
+    --glow-frustrated: 0 0 50px hsl(25 80% 50% / 0.5), 0 0 100px hsl(25 80% 50% / 0.25);
+    --glow-lonely: 0 0 60px hsl(250 40% 45% / 0.4), 0 0 120px hsl(250 40% 45% / 0.2);
+    --glow-peaceful: 0 0 60px hsl(170 50% 45% / 0.3), 0 0 120px hsl(170 50% 45% / 0.15);
+    --glow-grateful: 0 0 50px hsl(45 80% 55% / 0.4), 0 0 100px hsl(45 80% 55% / 0.2);
+    --glow-hopeful: 0 0 50px hsl(50 70% 60% / 0.4), 0 0 100px hsl(50 70% 60% / 0.2);
+    --glow-loving: 0 0 60px hsl(340 80% 60% / 0.5), 0 0 120px hsl(340 80% 60% / 0.25);
+    --glow-proud: 0 0 50px hsl(35 90% 50% / 0.4), 0 0 100px hsl(35 90% 50% / 0.2);
+    --glow-excited: 0 0 60px hsl(15 85% 55% / 0.5), 0 0 120px hsl(15 85% 55% / 0.25);
+    --glow-amused: 0 0 40px hsl(55 75% 50% / 0.4), 0 0 80px hsl(55 75% 50% / 0.2);
+    --glow-content: 0 0 40px hsl(160 40% 50% / 0.3), 0 0 80px hsl(160 40% 50% / 0.15);
+    --glow-jealous: 0 0 50px hsl(120 50% 35% / 0.4), 0 0 100px hsl(120 50% 35% / 0.2);
+    --glow-guilty: 0 0 40px hsl(20 30% 40% / 0.4), 0 0 80px hsl(20 30% 40% / 0.2);
+    --glow-ashamed: 0 0 40px hsl(350 40% 45% / 0.4), 0 0 80px hsl(350 40% 45% / 0.2);
+    --glow-disgusted: 0 0 40px hsl(80 40% 35% / 0.4), 0 0 80px hsl(80 40% 35% / 0.2);
+    --glow-bitter: 0 0 40px hsl(30 50% 30% / 0.4), 0 0 80px hsl(30 50% 30% / 0.2);
+    --glow-resentful: 0 0 50px hsl(0 50% 35% / 0.4), 0 0 100px hsl(0 50% 35% / 0.2);
+    --glow-envious: 0 0 40px hsl(150 40% 35% / 0.4), 0 0 80px hsl(150 40% 35% / 0.2);
+    --glow-nostalgic: 0 0 50px hsl(30 40% 50% / 0.4), 0 0 100px hsl(30 40% 50% / 0.2);
+    --glow-melancholic: 0 0 50px hsl(230 45% 50% / 0.4), 0 0 100px hsl(230 45% 50% / 0.15);
+    --glow-contemplative: 0 0 40px hsl(200 30% 55% / 0.3), 0 0 80px hsl(200 30% 55% / 0.15);
+    --glow-curious: 0 0 50px hsl(190 60% 55% / 0.4), 0 0 100px hsl(190 60% 55% / 0.2);
+    --glow-bored: 0 0 30px hsl(200 10% 45% / 0.3);
+    --glow-apathetic: 0 0 20px hsl(220 10% 40% / 0.2);
+    --glow-ecstatic: 0 0 100px hsl(50 100% 55% / 0.6), 0 0 200px hsl(50 100% 55% / 0.3);
+    --glow-devastated: 0 0 60px hsl(240 50% 30% / 0.5), 0 0 120px hsl(240 50% 30% / 0.25);
+    --glow-furious: 0 0 80px hsl(0 90% 45% / 0.6), 0 0 160px hsl(0 90% 45% / 0.3);
+    --glow-terrified: 0 0 70px hsl(280 70% 35% / 0.5), 0 0 140px hsl(280 70% 35% / 0.25);
+    --glow-awestruck: 0 0 80px hsl(280 60% 60% / 0.5), 0 0 160px hsl(280 60% 60% / 0.25);
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 210 40% 70%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 15%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 210 40% 50%;
   }
 }
 
