@@ -10,10 +10,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Switch } from '@/components/ui/switch';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 export const ProfileMenu = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [notifications, setNotifications] = useState(true);
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast({
+      title: 'Signed out',
+      description: 'You have been signed out successfully.'
+    });
+  };
 
   return (
     <motion.div
@@ -34,7 +46,14 @@ export const ProfileMenu = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 bg-card/95 backdrop-blur-md border-border/50">
           <DropdownMenuLabel className="text-foreground/80">
-            Profile Settings
+            <div className="flex flex-col">
+              <span>Profile</span>
+              {user?.email && (
+                <span className="text-xs font-normal text-muted-foreground truncate">
+                  {user.email}
+                </span>
+              )}
+            </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           
@@ -76,7 +95,10 @@ export const ProfileMenu = () => {
           
           <DropdownMenuSeparator />
           
-          <DropdownMenuItem className="flex items-center gap-2 cursor-pointer text-destructive focus:text-destructive">
+          <DropdownMenuItem 
+            className="flex items-center gap-2 cursor-pointer text-destructive focus:text-destructive"
+            onClick={handleSignOut}
+          >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
           </DropdownMenuItem>
