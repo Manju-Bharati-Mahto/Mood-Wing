@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, X } from 'lucide-react';
+import { BookOpen, X, Trash2 } from 'lucide-react';
 import type { Emotion } from '@/lib/emotionDetector';
 
 interface JournalEntry {
@@ -12,6 +12,7 @@ interface JournalEntry {
 
 interface EmotionCollectionProps {
   entries: JournalEntry[];
+  onDelete?: (id: string) => void;
 }
 
 const emotionColors: Record<Emotion, string> = {
@@ -131,8 +132,14 @@ const emotionEmojis: Record<Emotion, string> = {
   awestruck: '🤩'
 };
 
-export function EmotionCollection({ entries }: EmotionCollectionProps) {
+export function EmotionCollection({ entries, onDelete }: EmotionCollectionProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    setDeletingId(id);
+    onDelete?.(id);
+  };
 
   return (
     <>
@@ -225,9 +232,22 @@ export function EmotionCollection({ entries }: EmotionCollectionProps) {
                           <span className={`text-xs font-medium capitalize ${emotionTextColors[entry.emotion]}`}>
                             {emotionEmojis[entry.emotion]} {entry.emotion}
                           </span>
-                          <span className="text-xs text-muted-foreground/60">
-                            {entry.timestamp.toLocaleDateString()} · {entry.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-muted-foreground/60">
+                              {entry.timestamp.toLocaleDateString()} · {entry.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDelete(entry.id);
+                              }}
+                              disabled={deletingId === entry.id}
+                              className="p-1 rounded hover:bg-destructive/10 text-muted-foreground/60 hover:text-destructive transition-colors disabled:opacity-50"
+                              title="Delete entry"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </div>
                         
                         <p className="text-sm text-foreground/80 leading-relaxed line-clamp-4">
