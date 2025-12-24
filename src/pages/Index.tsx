@@ -4,6 +4,8 @@ import { EmotionalAnchor } from '@/components/EmotionalAnchor';
 import { MorphingTextArea } from '@/components/MorphingTextArea';
 import { AdaptiveSubmitButton } from '@/components/AdaptiveSubmitButton';
 import { EmotionIndicator } from '@/components/EmotionIndicator';
+import { RainEffect } from '@/components/RainEffect';
+import { CherryBlossomEffect } from '@/components/CherryBlossomEffect';
 import { useToast } from '@/hooks/use-toast';
 const emotionGradients: Record<string, string> = {
   neutral: 'from-background via-background to-background',
@@ -54,6 +56,10 @@ const Index = () => {
   }}>
       {/* Emotional Anchor - Always fixed */}
       <EmotionalAnchor />
+
+      {/* Weather/Nature Effects */}
+      <RainEffect active={emotion === 'sad'} />
+      <CherryBlossomEffect active={emotion === 'happy'} />
 
       {/* Ambient background effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
