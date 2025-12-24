@@ -88,10 +88,11 @@ export const RainEffect = ({ active }: RainEffectProps) => {
       {rainDrops.map((drop) => (
         <motion.div
           key={drop.id}
-          className="absolute w-[2px] bg-gradient-to-b from-transparent via-emotion-sad/60 to-emotion-sad/20"
+          className="absolute w-[2px]"
           style={{
             left: `${drop.left}%`,
             height: '80px',
+            background: `linear-gradient(to bottom, transparent, hsl(var(--emotion-sad) / 0.6), hsl(var(--emotion-sad) / 0.2))`,
           }}
           initial={{ y: -100, opacity: 0 }}
           animate={{
@@ -108,7 +109,12 @@ export const RainEffect = ({ active }: RainEffectProps) => {
       ))}
       
       {/* Rain mist overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-emotion-sad/5 via-transparent to-emotion-sad/10" />
+      <div 
+        className="absolute inset-0" 
+        style={{
+          background: `linear-gradient(to bottom, hsl(var(--emotion-sad) / 0.05), transparent, hsl(var(--emotion-sad) / 0.1))`,
+        }}
+      />
     </div>
   );
 };
