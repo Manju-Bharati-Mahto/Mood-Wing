@@ -13,10 +13,37 @@ const emotionEmoji: Record<Emotion, string> = {
   sad: '◇',
   happy: '★',
   anxious: '◈',
+  fearful: '◐',
   manic: '✦',
   confused: '◎',
   frustrated: '▣',
-  lonely: '♡'
+  lonely: '♡',
+  peaceful: '◯',
+  grateful: '❖',
+  hopeful: '☀',
+  loving: '♥',
+  proud: '▲',
+  excited: '✧',
+  amused: '☺',
+  content: '●',
+  jealous: '◉',
+  guilty: '▽',
+  ashamed: '◌',
+  disgusted: '✕',
+  bitter: '◬',
+  resentful: '▧',
+  envious: '◍',
+  nostalgic: '◔',
+  melancholic: '◗',
+  contemplative: '◑',
+  curious: '◓',
+  bored: '—',
+  apathetic: '·',
+  ecstatic: '✴',
+  devastated: '✖',
+  furious: '◆',
+  terrified: '◒',
+  awestruck: '✶'
 };
 
 const emotionColorClass: Record<Emotion, string> = {
@@ -25,10 +52,37 @@ const emotionColorClass: Record<Emotion, string> = {
   sad: 'text-emotion-sad',
   happy: 'text-emotion-happy',
   anxious: 'text-emotion-anxious',
+  fearful: 'text-emotion-fearful',
   manic: 'text-emotion-manic',
   confused: 'text-emotion-confused',
   frustrated: 'text-emotion-frustrated',
-  lonely: 'text-emotion-lonely'
+  lonely: 'text-emotion-lonely',
+  peaceful: 'text-emotion-peaceful',
+  grateful: 'text-emotion-grateful',
+  hopeful: 'text-emotion-hopeful',
+  loving: 'text-emotion-loving',
+  proud: 'text-emotion-proud',
+  excited: 'text-emotion-excited',
+  amused: 'text-emotion-amused',
+  content: 'text-emotion-content',
+  jealous: 'text-emotion-jealous',
+  guilty: 'text-emotion-guilty',
+  ashamed: 'text-emotion-ashamed',
+  disgusted: 'text-emotion-disgusted',
+  bitter: 'text-emotion-bitter',
+  resentful: 'text-emotion-resentful',
+  envious: 'text-emotion-envious',
+  nostalgic: 'text-emotion-nostalgic',
+  melancholic: 'text-emotion-melancholic',
+  contemplative: 'text-emotion-contemplative',
+  curious: 'text-emotion-curious',
+  bored: 'text-emotion-bored',
+  apathetic: 'text-emotion-apathetic',
+  ecstatic: 'text-emotion-ecstatic',
+  devastated: 'text-emotion-devastated',
+  furious: 'text-emotion-furious',
+  terrified: 'text-emotion-terrified',
+  awestruck: 'text-emotion-awestruck'
 };
 
 export function EmotionIndicator({ emotion, wpm, wordCount }: EmotionIndicatorProps) {
@@ -39,7 +93,6 @@ export function EmotionIndicator({ emotion, wpm, wordCount }: EmotionIndicatorPr
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
     >
-      {/* Emotion indicator */}
       <div className="flex items-center gap-2">
         <AnimatePresence mode="wait">
           <motion.span
@@ -65,7 +118,6 @@ export function EmotionIndicator({ emotion, wpm, wordCount }: EmotionIndicatorPr
         </AnimatePresence>
       </div>
 
-      {/* WPM indicator */}
       <div className="flex items-center gap-1.5">
         <motion.div
           className="w-1.5 h-1.5 rounded-full bg-primary"
@@ -78,7 +130,6 @@ export function EmotionIndicator({ emotion, wpm, wordCount }: EmotionIndicatorPr
         <span>{wpm} WPM</span>
       </div>
 
-      {/* Word count */}
       <div className="flex items-center gap-1.5">
         <span className="text-muted-foreground/50">|</span>
         <span>{wordCount} words</span>
