@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useEmotionState } from '@/hooks/useEmotionState';
 import { EmotionalAnchor } from '@/components/EmotionalAnchor';
@@ -8,7 +9,9 @@ import { RainEffect } from '@/components/RainEffect';
 import { CherryBlossomEffect } from '@/components/CherryBlossomEffect';
 import { SoothingAngerEffect } from '@/components/SoothingAngerEffect';
 import { FallingLettersEffect } from '@/components/FallingLettersEffect';
+import { EmotionCollection, type JournalEntry } from '@/components/EmotionCollection';
 import { useToast } from '@/hooks/use-toast';
+
 const emotionGradients: Record<string, string> = {
   neutral: 'from-background via-background to-background',
   angry: 'from-background via-emotion-angry/5 to-background',
@@ -20,6 +23,7 @@ const emotionGradients: Record<string, string> = {
   frustrated: 'from-background via-emotion-frustrated/8 to-background',
   lonely: 'from-emotion-lonely/5 via-background to-emotion-lonely/8'
 };
+
 const Index = () => {
   const {
     emotion,
@@ -29,9 +33,9 @@ const Index = () => {
     setText,
     resetEmotion
   } = useEmotionState();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
+
   const handleSubmit = () => {
     if (text.trim().length === 0) {
       toast({
@@ -41,6 +45,16 @@ const Index = () => {
       });
       return;
     }
+
+    // Add entry to collection
+    const newEntry: JournalEntry = {
+      id: crypto.randomUUID(),
+      text: text.trim(),
+      emotion,
+      timestamp: new Date()
+    };
+    setJournalEntries(prev => [newEntry, ...prev]);
+
     toast({
       title: "Entry saved",
       description: `Your ${emotion} moment has been captured.`
@@ -58,6 +72,9 @@ const Index = () => {
   }} transition={{
     duration: 0.8
   }}>
+      {/* Emotion Collection */}
+      <EmotionCollection entries={journalEntries} />
+
       {/* Emotional Anchor - Always fixed */}
       <EmotionalAnchor />
 
