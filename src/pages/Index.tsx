@@ -6,6 +6,7 @@ import { AdaptiveSubmitButton } from '@/components/AdaptiveSubmitButton';
 import { EmotionIndicator } from '@/components/EmotionIndicator';
 import { RainEffect } from '@/components/RainEffect';
 import { CherryBlossomEffect } from '@/components/CherryBlossomEffect';
+import { SoothingAngerEffect } from '@/components/SoothingAngerEffect';
 import { useToast } from '@/hooks/use-toast';
 const emotionGradients: Record<string, string> = {
   neutral: 'from-background via-background to-background',
@@ -60,6 +61,7 @@ const Index = () => {
       {/* Weather/Nature Effects */}
       <RainEffect active={emotion === 'sad'} />
       <CherryBlossomEffect active={emotion === 'happy'} />
+      <SoothingAngerEffect active={emotion === 'angry'} />
 
       {/* Ambient background effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
